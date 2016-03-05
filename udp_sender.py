@@ -5,12 +5,10 @@ import socket
 import sys, time
 import json
 
+PORT = 8888
+
 with open('config.json') as config_file:
 	config = json.load(config_file)
-
-	udp_host = config['udp_host']
-	udp_port = config['udp_port']
-
 	msg_data = {}
 	msg_data['name'] = config['name']
 	msg_data['location'] = config['location']
@@ -21,16 +19,14 @@ if (len(sys.argv) > 1):
 else:
 	interval = 5
 
-try:
-	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	print 'Socket created.'
-except socket.error, msg:
-	print 'Failed to create socket. Error Code: ' + str(msg[0]) + ' Message: ' + msg[1]
-	sys.exit()
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+s.bind(('', 0))
 
 print 'Message: ' + msg
-print 'Sending message to {}:{} every {} sec.'.format(udp_host, udp_port, interval)
+print 'Interval:', interval
  
 while 1:
-    sock.sendto(msg, (udp_host, udp_port))
+    s.sendto(msg, ("<broadcast>", PORT))
     time.sleep(interval)
