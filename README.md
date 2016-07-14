@@ -1,7 +1,15 @@
-
-Beaconing system for Overplayer.
-
-Sever app will run on Overplayer as a daemon, shouting into the mist every so often. Client app is for testing. Real client will be in iOS and Android apps.
-
+#Python UDP Helpers
 
 Collection of Python utilities to help debug UDP apps.
+
+##OPIE_sim.py
+
+Simulates multiple OGs running on the network. Use for testing mobile apps.
+
+Read code to figure out args, then feel free to document here (MK :)).
+ 
+##Other Apps
+
+Dunno what they do. Figure it out, OGs.
+
+
