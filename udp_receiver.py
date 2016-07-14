@@ -1,7 +1,7 @@
 import socket
 import sys
 
-PORT = 8888
+PORT = 9090 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.bind(('', PORT))
